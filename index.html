@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant</title>
+    <script>
+        async function speak() {
+            const text = document.getElementById('text').value;
+            const response = await fetch('http://<server-ip>:5000/speak', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text }),
+            });
+            const result = await response.json();
+            alert(result.message);
+        }
+
+        async function getJoke() {
+            const response = await fetch('http://<server-ip>:5000/joke');
+            const result = await response.json();
+            alert(result.joke);
+        }
+
+        async function getTime() {
+            const response = await fetch('http://<server-ip>:5000/time');
+            const result = await response.json();
+            alert('Current time is: ' + result.time);
+        }
+
+        async function searchWiki() {
+            const query = document.getElementById('query').value;
+            const response = await fetch('http://<server-ip>:5000/wikipedia', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query }),
+            });
+            const result = await response.json();
+            if (result.status === 'success') {
+                alert('Result: ' + result.result);
+            } else {
+                alert('Error: ' + result.message);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Voice Assistant</h1>
+    <input type="text" id="text" placeholder="Text to Speak">
+    <button onclick="speak()">Speak</button>
+    <br><br>
+    <button onclick="getJoke()">Tell me a Joke</button>
+    <br><br>
+    <button onclick="getTime()">Get Current Time</button>
+    <br><br>
+    <input type="text" id="query" placeholder="Search Wikipedia">
+    <button onclick="searchWiki()">Search Wikipedia</button>
+</body>
+</html>
