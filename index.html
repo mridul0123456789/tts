@@ -7,7 +7,7 @@
     <script>
         async function speak() {
             const text = document.getElementById('text').value;
-            const response = await fetch('http://https://tts-1gux.onrender.com:5000/speak', {
+            const response = await fetch('http://https://0.0.0.0:5000/speak', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text }),
@@ -17,20 +17,20 @@
         }
 
         async function getJoke() {
-            const response = await fetch('http://https://tts-1gux.onrender.com:5000/joke');
+            const response = await fetch('http://https://0.0.0.0:5000/joke');
             const result = await response.json();
             alert(result.joke);
         }
 
         async function getTime() {
-            const response = await fetch('http://https://tts-1gux.onrender.com:5000/time');
+            const response = await fetch('http://https://0.0.0.0:5000/time');
             const result = await response.json();
             alert('Current time is: ' + result.time);
         }
 
         async function searchWiki() {
             const query = document.getElementById('query').value;
-            const response = await fetch('http://https://tts-1gux.onrender.com:5000/wikipedia', {
+            const response = await fetch('http://https://0.0.0.0:5000/wikipedia', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query }),
